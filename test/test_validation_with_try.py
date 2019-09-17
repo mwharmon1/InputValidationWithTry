@@ -4,7 +4,7 @@
     from average_scores.py
     Update: Add tests for ValueError
     Update: Modified test_average_negative_input
-    to test score 2 raises value error
+    to test score 3 raises value error
 """
 
 import unittest
@@ -27,7 +27,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_average_negative_input(self):
         with self.assertRaises(ValueError):
-            v.average(96, -93, 88)
+            v.average(96, 93, -88)
 
 
 if __name__ == '__main__':
