@@ -3,12 +3,12 @@
     Description: This program will prompt for user's name
     and 3 scores out of 100 then average the scores and
     display the name and average grade.
-    Update: Changed function to take in parameters for testing.
+    Update: Added if to check for negative value for score1 and score2
 """
 
 
 def average(score1, score2, score3):
-    if score1 <= 0:
+    if score1 <= 0 or score2 <= 0:
         raise ValueError
     else:
         average_score = (float(score1) + float(score2) + float(score3)) / 3
