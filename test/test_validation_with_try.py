@@ -1,10 +1,12 @@
 """ Author: Michael Harmon
-    Last Date Modified: 09/16/2019
+    Last Date Modified: 09/23/2019
     Description: These unit tests with test the average()
     from average_scores.py
     Update: Add tests for ValueError
-    Update: Modified test_average_negative_input
-    to test score 3 raises value error
+    Update: Added more tests to validate
+    function raises value error for all 3 scores
+    when negative. Using assert instead of mock because
+    my function takes in 3 args so I don't need to mock them.
 """
 
 import unittest
@@ -14,20 +16,19 @@ from input_validation import validation_with_try as v
 
 class MyTestCase(unittest.TestCase):
     def test_average_positive(self):
-        with mock.patch('builtins.input', side_effect=[85, 90, 95]):
-            assert v.average() == 90
+        self.assertEqual(v.average(98, 93, 88), 93)
 
     def test_average_negative(self):
-        with mock.patch('builtins.input', side_effect=[98, 93, 88]):
-            assert v.average() != 91
+        self.assertNotEqual(v.average(100, 87, 91), 90)
 
-    def test_average_string_raises_ValueError(self):
-        with mock.patch('builtins.input', side_effect=['Test', 'Test', 'Test']):
-            self.assertRaises(ValueError)
+    def test_average_negative_input_raises_value_error_score_1(self):
+        self.assertRaises(ValueError, v.average, -99, 87, 91)
 
-    def test_average_negative_input(self):
-        with self.assertRaises(ValueError):
-            v.average(96, 93, -88)
+    def test_average_negative_input_raises_value_error_score_2(self):
+        self.assertRaises(ValueError, v.average, 99, -84, 91)
+
+    def test_average_negative_input_raises_value_error_score_3(self):
+        self.assertRaises(ValueError, v.average, 100, 88, -97)
 
 
 if __name__ == '__main__':
@@ -37,4 +38,6 @@ if __name__ == '__main__':
     I added a positive test that returned the correct average and a negative test
     that would not return the correct average.
     This will ensure the average() method is calculating correctly.
+    I also added tests to raise value error for all 3 scores when 
+    they are negative.
 """
